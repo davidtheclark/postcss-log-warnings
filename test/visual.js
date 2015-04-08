@@ -29,7 +29,7 @@ fs.readFile('test/forVisual.css', { encoding: 'utf8' }, function(err, data) {
   postcss()
     .use(rejectColors())
     .use(rejectBackgrounds())
-    .use(logWarnings())
+    .use(logWarnings({ throwError: true }))
     .process(data, { from: 'test/forVisual.css' })
     .then(function() {
       console.log('There\'s your visual confirmation that it works.');

@@ -1,7 +1,7 @@
 {
   "name": "postcss-log-warnings",
   "version": "0.1.0",
-  "description": "Log PostCSS warnings, and optionally throw errors",
+  "description": "Log PostCSS warnings in the console",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
@@ -24,10 +24,10 @@
   "homepage": "https://github.com/davidtheclark/postcss-log-warnings",
   "devDependencies": {
     "eslint": "0.18.0",
-    "postcss": "4.1.4",
     "tape": "4.0.0"
   },
   "dependencies": {
-    "chalk": "^1.0.0"
+    "chalk": "^1.0.0",
+    "postcss": "^4.1.0"
   }
 }
