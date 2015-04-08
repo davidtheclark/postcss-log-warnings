@@ -49,5 +49,11 @@ gulp.task('css', function() {
 
 ### Options
 
-- **plugins** (array of strings, default = []): If empty, `logWarnings` will log every warning, regardless of which plugin registered it. To limit output, name the plugins whose warnings you would like to see. For example, `{ plugins: ['postcss-bem-linter'] }` will only log warnings from the `postcss-bem-linter` plugin.
-- **throwError** (boolean, default = `false`): If `true`, after `logWarnings` logs your warnings it will exit the process with code 1 if it found any warnings.
+- **plugins** (array of strings, default = [])
+
+  If empty, `logWarnings` will log every warning, regardless of which plugin registered it.
+  To limit output, name the plugins whose warnings you would like to see.
+  For example, `{ plugins: ['postcss-bem-linter'] }` will only log warnings from the `postcss-bem-linter` plugin.
+- **throwError** (boolean, default = `false`)
+
+  If `true`, after `logWarnings` logs your warnings it will exit the process with code 1 if it found any warnings.
