@@ -11,7 +11,7 @@ module.exports = postcss.plugin('postcss-log-warnings', function(opts) {
       processResult(result, resolve, opts);
     });
     p.then(function(r) {
-      console.log(r);
+      if (r) console.log(r);
       if (opts.throwError) exitCode = 1;
     });
     return p;
