@@ -19,5 +19,5 @@ module.exports = postcss.plugin('postcss-log-warnings', function(opts) {
 });
 
 process.on('exit', function() {
-  process.exit(exitCode);
+  if (exitCode) process.exit(exitCode);
 });
