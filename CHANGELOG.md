@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.1.2
+- Only log if there is something to log (don't log undefined).
+
 ## v0.1.1
 - Only exit process if code is non-zero.
 
