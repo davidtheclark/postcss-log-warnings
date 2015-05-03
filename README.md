@@ -42,11 +42,11 @@ gulp.task('css', function() {
 
 ### Options
 
-- **keepWarnings** (boolean, default = false)
+- **keepWarnings** (boolean, default = `false`)
 
   If true, the plugin will *not* clear the warnings after it logs them (by default, it will clear them). Other plugins will then have access to these warnings and might re-print them.
 
-- **plugins** (array of strings, default = [])
+- **plugins** (array of strings, default = `[]`)
 
   If empty, the plugin will log every warning, regardless of which plugin registered it.
   To limit output, name the plugins whose warnings you would like to see.
