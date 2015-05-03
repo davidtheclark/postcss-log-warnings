@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/davidtheclark/postcss-log-warnings",
   "devDependencies": {
-    "eslint": "0.18.0",
+    "eslint": "0.20.0",
     "tape": "4.0.0"
   },
   "dependencies": {
