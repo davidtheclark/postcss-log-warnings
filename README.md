@@ -38,13 +38,20 @@ gulp.task('css', function() {
 });
 ```
 
+*By default, this plugin will clear the warnings after it logs them*. Otherwise, your other plugins or your PostCSS runner might re-print the same warnings, causing some confusion. This can be changed by setting the option `{ keepWarnings: true }`.
+
 ### Options
+
+- **keepWarnings** (boolean, default = false)
+
+  If true, the plugin will *not* clear the warnings after it logs them (by default, it will clear them). Other plugins will then have access to these warnings and might re-print them.
 
 - **plugins** (array of strings, default = [])
 
-  If empty, `logWarnings` will log every warning, regardless of which plugin registered it.
+  If empty, the plugin will log every warning, regardless of which plugin registered it.
   To limit output, name the plugins whose warnings you would like to see.
   For example, `{ plugins: ['postcss-bem-linter'] }` will only log warnings from the `postcss-bem-linter` plugin.
+
 - **throwError** (boolean, default = `false`)
 
-  If `true`, after `logWarnings` logs your warnings it will exit the process with code 1 if it found any warnings.
+  If `true`, after the plugin logs your warnings it will exit the process with code 1 if it found any warnings.

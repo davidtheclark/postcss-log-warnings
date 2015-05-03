@@ -3,21 +3,27 @@
 var test = require('tape');
 var processResult = require('../lib/processResult');
 var chalk = require('chalk');
+var _ = require('lodash');
 var path = require('path');
 
 var mockSimpleResult = {
-  warnings: function() {
-    return [{
-      plugin: 'foo',
-      text: 'foo warning'
-    }, {
-      plugin: 'bar',
-      text: 'bar warning'
-    }, {
-      plugin: 'baz',
-      text: 'baz warning'
-    }];
-  },
+  messages: [{
+    type: 'warning',
+    plugin: 'foo',
+    text: 'foo warning'
+  }, {
+    type: 'warning',
+    plugin: 'bar',
+    text: 'bar warning'
+  }, {
+    type: 'warning',
+    plugin: 'baz',
+    text: 'baz warning'
+  }, {
+    type: 'error',
+    plugin: 'baz',
+    text: 'baz error'
+  }],
   root: {
     source: {
       input: {
@@ -25,6 +31,12 @@ var mockSimpleResult = {
       }
     }
   }
+};
+
+mockSimpleResult.warnings = function() {
+  return this.messages.filter(function(m) {
+    return m.type === 'warning';
+  });
 };
 
 var simpleOutput = '\n<input css 1>' +
@@ -38,40 +50,59 @@ var simpleOutputNoBar = '\n<input css 1>' +
 
 test('processResult with simple mock', function(t) {
   t.plan(2);
-  processResult(mockSimpleResult, function(r) {
+  processResult(_.cloneDeep(mockSimpleResult), function(r) {
     t.equal(chalk.stripColor(r), simpleOutput, 'basic');
   });
-  processResult(mockSimpleResult, function(r) {
+  processResult(_.cloneDeep(mockSimpleResult), function(r) {
     t.equal(chalk.stripColor(r), simpleOutputNoBar, 'excluding bar');
   }, { plugins: ['foo', 'baz']});
 });
 
+test('clearing warnings from result.messages', function(t) {
+  t.plan(3);
+  var resultA = _.cloneDeep(mockSimpleResult);
+  var resultB = _.cloneDeep(mockSimpleResult);
+
+  t.equal(resultA.warnings().length, 3, 'initial length accurate');
+  processResult(resultA, function() {
+    t.equal(resultA.warnings().length, 0, 'warnings are cleared');
+  });
+  processResult(resultB, function() {
+    t.deepEqual(mockSimpleResult.messages, resultB.messages,
+      'keepWarnings option preserves messages exactly');
+  }, { keepWarnings: true });
+});
+
 var mockComplexResult = {
-  warnings: function() {
-    return [{
-      plugin: 'foo',
-      text: 'foo warning',
-      node: {
-        source: {
-          start: {
-            line: 3,
-            column: 5
-          }
+  messages: [{
+    type: 'warning',
+    plugin: 'foo',
+    text: 'foo warning',
+    node: {
+      source: {
+        start: {
+          line: 3,
+          column: 5
         }
       }
-    }, {
-      plugin: 'bar',
-      text: 'bar warning',
-      node: {
-        source: {
-          start: {
-            line: 1,
-            column: 99
-          }
+    }
+  }, {
+    type: 'warning',
+    plugin: 'bar',
+    text: 'bar warning',
+    node: {
+      source: {
+        start: {
+          line: 1,
+          column: 99
         }
       }
-    }];
-  },
+    }
+  }, {
+    type: 'error',
+    plugin: 'baz',
+    text: 'baz error'
+  }],
   root: {
     source: {
       input: {
@@ -79,6 +110,12 @@ var mockComplexResult = {
       }
     }
   }
+};
+
+mockComplexResult.warnings = function() {
+  return this.messages.filter(function(m) {
+    return m.type === 'warning';
+  });
 };
 
 var complexOutput = '\nstyle/rainbows/horses.css' +
@@ -91,10 +128,10 @@ var complexOutputNoBar = '\nstyle/rainbows/horses.css' +
 
 test('processResult with complex mock', function(t) {
   t.plan(2);
-  processResult(mockComplexResult, function(r) {
+  processResult(_.cloneDeep(mockComplexResult), function(r) {
     t.equal(chalk.stripColor(r), complexOutput, 'basic');
   });
-  processResult(mockComplexResult, function(r) {
+  processResult(_.cloneDeep(mockComplexResult), function(r) {
     t.equal(chalk.stripColor(r), complexOutputNoBar, 'excluding bar');
   }, { plugins: ['foo']});
 });

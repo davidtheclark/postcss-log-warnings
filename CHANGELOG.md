@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.1.4
+- Clear warnings from postcssResult.messages after logging them (configurable with option `keepWarnings`).
+
 ## v0.1.3
 - Add message when exiting process with code 1 to clarify reason.
 

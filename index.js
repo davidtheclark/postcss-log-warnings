@@ -6,14 +6,16 @@ var processResult = require('./lib/processResult');
 
 var exitCode = 0;
 
-module.exports = postcss.plugin('postcss-log-warnings', function(opts) {
+module.exports = postcss.plugin('postcss-log-warnings', function(options) {
+  options = options || {};
+
   return function(css, result) {
     var p = new Promise(function(resolve) {
-      processResult(result, resolve, opts);
+      processResult(result, resolve, options);
     });
     p.then(function(r) {
       if (r) console.log(r);
-      if (opts.throwError) exitCode = 1;
+      if (options.throwError) exitCode = 1;
     });
     return p;
   };
