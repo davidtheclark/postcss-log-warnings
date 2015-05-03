@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.1.3
+- Add message when exiting process with code 1 to clarify reason.
+
 ## v0.1.2
 - Only log if there is something to log (don't log undefined).
 
