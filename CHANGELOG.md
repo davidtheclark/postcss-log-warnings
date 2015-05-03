@@ -1,6 +1,7 @@
 # Changelog
 
-## v0.1.4
+## v0.2.0
+- Change the print format slightly.
 - Clear warnings from postcssResult.messages after logging them (configurable with option `keepWarnings`).
 
 ## v0.1.3

@@ -39,14 +39,16 @@ mockSimpleResult.warnings = function() {
   });
 };
 
-var simpleOutput = '\n<input css 1>' +
-  '\n[foo] foo warning' +
-  '\n[bar] bar warning' +
-  '\n[baz] baz warning\n';
+var simpleOutput = '\n# postcss-log-warnings\n' +
+  '\n<input css 1>' +
+  '\nfoo warning [foo]' +
+  '\nbar warning [bar]' +
+  '\nbaz warning [baz]\n';
 
-var simpleOutputNoBar = '\n<input css 1>' +
-  '\n[foo] foo warning' +
-  '\n[baz] baz warning\n';
+var simpleOutputNoBar = '\n# postcss-log-warnings\n' +
+  '\n<input css 1>' +
+  '\nfoo warning [foo]' +
+  '\nbaz warning [baz]\n';
 
 test('processResult with simple mock', function(t) {
   t.plan(2);
@@ -118,11 +120,13 @@ mockComplexResult.warnings = function() {
   });
 };
 
-var complexOutput = '\nstyle/rainbows/horses.css' +
-  '\n3:5\t[foo] foo warning' +
-  '\n1:99\t[bar] bar warning\n';
+var complexOutput = '\n# postcss-log-warnings\n' +
+  '\nstyle/rainbows/horses.css' +
+  '\n3:5\tfoo warning [foo]' +
+  '\n1:99\tbar warning [bar]\n';
 
-var complexOutputNoBar = '\nstyle/rainbows/horses.css' +
+var complexOutputNoBar = '\n# postcss-log-warnings\n' +
+  '\nstyle/rainbows/horses.css' +
   '\n3:5\tfoo warning\n';
 
 
