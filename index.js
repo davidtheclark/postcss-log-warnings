@@ -1,6 +1,7 @@
 'use strict';
 
 var postcss = require('postcss');
+var chalk = require('chalk');
 var processResult = require('./lib/processResult');
 
 var exitCode = 0;
@@ -19,5 +20,8 @@ module.exports = postcss.plugin('postcss-log-warnings', function(opts) {
 });
 
 process.on('exit', function() {
-  if (exitCode) process.exit(exitCode);
+  if (!exitCode) return;
+
+  console.log(chalk.red.bold('\n** PostCSS warnings were logged **'));
+  process.exit(exitCode);
 });
