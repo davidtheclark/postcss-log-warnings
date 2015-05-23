@@ -51,28 +51,39 @@ var simpleOutputNoBar = '\n# postcss-log-warnings\n' +
   '\nbaz warning [baz]\n';
 
 test('processResult with simple mock', function(t) {
-  t.plan(2);
-  processResult(_.cloneDeep(mockSimpleResult), function(r) {
-    t.equal(chalk.stripColor(r), simpleOutput, 'basic');
-  });
-  processResult(_.cloneDeep(mockSimpleResult), function(r) {
-    t.equal(chalk.stripColor(r), simpleOutputNoBar, 'excluding bar');
-  }, { plugins: ['foo', 'baz']});
+  t.equal(
+    chalk.stripColor(processResult(_.cloneDeep(mockSimpleResult))),
+    simpleOutput,
+    'basic'
+  );
+
+  t.equal(
+    chalk.stripColor(
+      processResult(_.cloneDeep(mockSimpleResult), { plugins: ['foo', 'baz']})
+    ),
+    simpleOutputNoBar,
+    'excluding bar'
+  );
+
+  t.end();
 });
 
 test('clearing warnings from result.messages', function(t) {
-  t.plan(3);
   var resultA = _.cloneDeep(mockSimpleResult);
   var resultB = _.cloneDeep(mockSimpleResult);
 
   t.equal(resultA.warnings().length, 3, 'initial length accurate');
-  processResult(resultA, function() {
-    t.equal(resultA.warnings().length, 0, 'warnings are cleared');
-  });
-  processResult(resultB, function() {
-    t.deepEqual(mockSimpleResult.messages, resultB.messages,
+
+  processResult(resultA);
+
+  t.equal(resultA.warnings().length, 0, 'warnings are cleared');
+
+  processResult(resultB, { keepWarnings: true });
+
+  t.deepEqual(mockSimpleResult.messages, resultB.messages,
       'keepWarnings option preserves messages exactly');
-  }, { keepWarnings: true });
+
+  t.end();
 });
 
 var mockComplexResult = {
@@ -131,11 +142,17 @@ var complexOutputNoBar = '\n# postcss-log-warnings\n' +
 
 
 test('processResult with complex mock', function(t) {
-  t.plan(2);
-  processResult(_.cloneDeep(mockComplexResult), function(r) {
-    t.equal(chalk.stripColor(r), complexOutput, 'basic');
-  });
-  processResult(_.cloneDeep(mockComplexResult), function(r) {
-    t.equal(chalk.stripColor(r), complexOutputNoBar, 'excluding bar');
-  }, { plugins: ['foo']});
+  t.equal(
+    chalk.stripColor(processResult(_.cloneDeep(mockComplexResult))),
+    complexOutput,
+    'basic'
+  );
+
+  t.equal(
+    chalk.stripColor(processResult(_.cloneDeep(mockComplexResult), { plugins: ['foo'] })),
+    complexOutputNoBar,
+    'excluding bar'
+  );
+
+  t.end();
 });
