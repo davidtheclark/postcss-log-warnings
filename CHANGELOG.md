@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.2.1
+## v0.2.3
 - Remove async.
 
 ## v0.2.0

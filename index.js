@@ -21,9 +21,9 @@ module.exports = postcss.plugin('postcss-log-warnings', function(options) {
   };
 });
 
-// process.on('exit', function() {
-//   if (!exitCode) return;
-//
-//   console.log(chalk.red.bold('\n** postcss-log-warnings: warnings were found **'));
-//   process.exit(exitCode);
-// });
+process.on('exit', function() {
+  if (!exitCode) return;
+
+  console.log(chalk.red.bold('\n** postcss-log-warnings: warnings were found **'));
+  process.exit(exitCode);
+});
