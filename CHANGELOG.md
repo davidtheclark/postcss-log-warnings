@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.2.1
+- Remove async.
+
 ## v0.2.0
 - Change the print format slightly.
 - Clear warnings from postcssResult.messages after logging them (configurable with option `keepWarnings`).
