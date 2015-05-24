@@ -23,9 +23,13 @@
   },
   "homepage": "https://github.com/davidtheclark/postcss-log-warnings",
   "devDependencies": {
+    "css-loader": "0.14.0",
     "eslint": "0.20.0",
     "lodash": "3.8.0",
-    "tape": "4.0.0"
+    "postcss-loader": "0.4.3",
+    "style-loader": "0.12.2",
+    "tape": "4.0.0",
+    "webpack": "1.9.8"
   },
   "dependencies": {
     "chalk": "^1.0.0",
