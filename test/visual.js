@@ -33,6 +33,5 @@ fs.readFile('test/forVisual.css', { encoding: 'utf8' }, function(err, data) {
     .process(data, { from: 'test/forVisual.css' })
     .then(function() {
       console.log('There\'s your visual confirmation that it works.');
-    })
-    .catch(console.log.bind(console));
+    });
 });
