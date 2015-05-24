@@ -54,4 +54,4 @@ gulp.task('css', function() {
 
 - **throwError** (boolean, default = `false`)
 
-  If `true`, after the plugin logs your warnings it will exit the process with code 1 if it found any warnings.
+  If `true`, after the plugin logs your warnings it will throw an error if it found any warnings.
