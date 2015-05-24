@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.3.0
+- Throw error instead of exiting process when `throwError: true`.
+
 ## v0.2.3
 - Remove async.
 

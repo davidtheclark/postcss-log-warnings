@@ -1,6 +1,6 @@
 {
   "name": "postcss-log-warnings",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Log PostCSS warnings in the console",
   "main": "index.js",
   "scripts": {
