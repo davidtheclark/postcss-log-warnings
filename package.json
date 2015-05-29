@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "eslint .",
     "test": "npm run lint && tape test",
-    "visual": "node test/visual.js"
+    "visual": "node test/visual.js console",
+    "visual-browser": "node test/visual.js browser"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "eslint": "0.20.0",
     "lodash": "3.8.0",
+    "postcss-bem-linter": "0.3.0",
     "tape": "4.0.0"
   },
   "dependencies": {

@@ -1,37 +1,30 @@
 'use strict';
 
 var postcss = require('postcss');
+var bemLinter = require('postcss-bem-linter');
 var logWarnings = require('..');
 var fs = require('fs');
 
-var rejectColors = postcss.plugin('reject-colors', function() {
-  return function(css, result) {
-    css.eachDecl(function(decl) {
-      if (decl.prop === 'color') {
-        result.warn('no colors allowed', { node: decl });
-      }
-    });
-  };
-});
+var display = process.argv[2] || 'console';
 
-var rejectBackgrounds = postcss.plugin('reject-backgrounds', function() {
-  return function(css, result) {
-    css.eachDecl(function(decl) {
-      if (decl.prop === 'background') {
-        result.warn('no backgrounds allowed', { node: decl });
-      }
-    });
-  };
-});
-
-fs.readFile('test/forVisual.css', { encoding: 'utf8' }, function(err, data) {
-  if (err) throw err;
+fs.readFile('test/forVisual.css', { encoding: 'utf8' }, function(readErr, data) {
+  if (readErr) throw readErr;
   postcss()
-    .use(rejectColors())
-    .use(rejectBackgrounds())
-    .use(logWarnings({ throwError: true }))
+    .use(bemLinter())
+    .use(logWarnings({
+      console: display === 'console',
+      browser: display === 'browser',
+      throwError: display === 'console'
+    }))
     .process(data, { from: 'test/forVisual.css' })
-    .then(function() {
+    .then(function(result) {
+      fs.writeFile('test/compiled.css', result.css, function(writeErr) {
+        if (writeErr) throw writeErr;
+        console.log('Now open test/visual.html in a browser!');
+      });
+    })
+    .catch(function(ourErr) {
+      console.log(ourErr);
       console.log('There\'s your visual confirmation that it works.');
     });
 });
