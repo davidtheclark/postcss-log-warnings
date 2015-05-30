@@ -55,3 +55,9 @@ gulp.task('css', function() {
 - **throwError** (boolean, default = `false`)
 
   If `true`, after the plugin logs your warnings it will throw an error if it found any warnings.
+
+- **callback** (function, default = `warnings => console.log(warnings)`)
+
+  Receives a formatted string containing all warnings, as well as a PostCSS
+  `Result` instance. This allows another plugin to use postcss-log-warnings as a
+  library and display the warnings in a different way.
