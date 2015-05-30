@@ -1,16 +1,17 @@
 # postcss-log-warnings [![Build Status](https://travis-ci.org/davidtheclark/postcss-log-warnings.svg?branch=master)](https://travis-ci.org/davidtheclark/postcss-log-warnings)
 
-Log PostCSS warnings in the console.
+Log PostCSS warnings in the console and in the browser.
 
 ## Purpose
 
 As of PostCSS 4.1, a single PostCSS process can accumulate warnings from all of the plugins it uses.
 Presumably, plugin authors want you to see those warnings.
-So this plugin exists to read the accumulated warnings (or warnings from only the plugins you've specified), format them for human legibility, and print them to the console.
+So this plugin exists to read the accumulated warnings (or warnings from only the plugins you've specified), format them for human legibility, and print them to the console, display them in the browser or both.
 
 ## Example Output
 
-![Example](example.png?raw=true)
+![Console example](example-console.png?raw=true)
+![Browser example](example-browser.png?raw=true)
 
 ## Installation
 
@@ -41,6 +42,14 @@ gulp.task('css', function() {
 *By default, this plugin will clear the warnings after it logs them*. Otherwise, your other plugins or your PostCSS runner might re-print the same warnings, causing some confusion. This can be changed by setting the option `{ keepWarnings: true }`.
 
 ### Options
+
+- **console** (boolean, default = `true`)
+
+  Whether or not to log to the console.
+
+- **browser** (boolean, default = `false`)
+
+  Whether or not to display warnings in the browser. (This works by injecting `head::before { content: '{warnings}' }` (and some nice styling of it) into the CSS.)
 
 - **keepWarnings** (boolean, default = `false`)
 

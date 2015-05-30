@@ -1,12 +1,8 @@
-body {
+/** @define HamSandwich */
+.Ham.Sandwich {
   color: pink;
 }
 
-div {
-  color: orange;
-  background: blue;
-}
-
-p {
-    color: yellow;
+:root a {
+    font-weight: bold;
 }

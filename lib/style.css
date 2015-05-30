@@ -1,0 +1,29 @@
+head {
+  display: block;
+}
+
+head::before, head::after {
+  position: fixed;
+  top: 0;
+  z-index: 2147483647; /* Maximum value browsers accept. */
+  min-height: 3em;
+  font: 14px/1.2 monospace;
+  color: white;
+}
+
+head::before {
+  content: '$OUTPUT';
+  left: 0;
+  right: 0;
+  padding: 1em;
+  padding-left: 5em; /* Add room for the warning sign. */
+  background: #DF4F5E;
+  white-space: pre;
+}
+
+head::after {
+  content: '\26A0'; /* Warning sign. */
+  left: 0.25em;
+  font-size: 5em;
+  line-height: 1;
+}
