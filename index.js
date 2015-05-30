@@ -12,10 +12,15 @@ module.exports = postcss.plugin('postcss-log-warnings', function(options) {
 
     if (!warningLog) return;
 
-    console.log(warningLog);
+    var callback = options.callback || defaultCallback;
+    callback(warningLog, result);
 
     if (options.throwError) {
       throw new Error(chalk.red.bold('\n** postcss-log-warnings: warnings were found **'));
     }
   };
 });
+
+function defaultCallback(warningLog) {
+  console.log(warningLog);
+}
