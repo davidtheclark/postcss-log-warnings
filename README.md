@@ -40,6 +40,13 @@ gulp.task('css', function() {
 
 *By default, this plugin will clear the warnings after it logs them*. Otherwise, your other plugins or your PostCSS runner might re-print the same warnings, causing some confusion. This can be changed by setting the option `{ keepWarnings: true }`.
 
+You can also use this module as a library:
+
+```js
+var processResult = require('postcss-log-warnings/lib/processResult');
+var warningLog = processResult(postcssResult, options);
+```
+
 ### Options
 
 - **keepWarnings** (boolean, default = `false`)
@@ -55,3 +62,4 @@ gulp.task('css', function() {
 - **throwError** (boolean, default = `false`)
 
   If `true`, after the plugin logs your warnings it will throw an error if it found any warnings.
+  (Not part of the library options.)

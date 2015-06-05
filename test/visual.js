@@ -39,6 +39,10 @@ fs.readFile('test/forVisual.css', { encoding: 'utf8' }, function(err, data) {
     .use(logWarnings({ throwError: true }))
     .process(data, { from: 'test/forVisual.css' })
     .then(function() {
+      console.error('`throwError: true` failed!');
+    })
+    .catch(function(ourErr) {
+      console.log(ourErr);
       console.log('There\'s your visual confirmation that it works.');
     })
     .catch(function(error) {
