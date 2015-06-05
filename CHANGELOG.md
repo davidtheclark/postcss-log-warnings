@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.3.1
+- Fix bug causing error if warning is on root node.
+
 ## v0.3.0
 - Throw error instead of exiting process when `throwError: true`.
 
