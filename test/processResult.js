@@ -156,3 +156,42 @@ test('processResult with complex mock', function(t) {
 
   t.end();
 });
+
+var mockWarningOnRootResult = {
+  messages: [{
+    type: 'warning',
+    text: 'blergh',
+    node: {
+      type: 'root',
+      // warnings on root do not have start position
+      source: {}
+    },
+    plugin: 'reject-root'
+  }],
+  root: {
+    source: {
+      input: {
+        from: '<input css 1>'
+      }
+    }
+  }
+};
+
+mockWarningOnRootResult.warnings = function() {
+  return this.messages.filter(function(m) {
+    return m.type === 'warning';
+  });
+};
+
+var warningOnRootResultOutput = '\n# postcss-log-warnings\n' +
+  '\n<input css 1>' +
+  '\nblergh [reject-root]\n';
+
+test('processResult with mocked warning on root', function(t) {
+  console.log(chalk.stripColor(processResult(_.cloneDeep(mockWarningOnRootResult))));
+  t.equal(
+    chalk.stripColor(processResult(_.cloneDeep(mockWarningOnRootResult))),
+    warningOnRootResultOutput
+  );
+  t.end();
+});

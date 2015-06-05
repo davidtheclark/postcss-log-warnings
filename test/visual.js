@@ -24,14 +24,24 @@ var rejectBackgrounds = postcss.plugin('reject-backgrounds', function() {
   };
 });
 
+var rejectRoot = postcss.plugin('reject-root', function() {
+  return function(css, result) {
+    result.warn('blergh', { node: css });
+  };
+});
+
 fs.readFile('test/forVisual.css', { encoding: 'utf8' }, function(err, data) {
   if (err) throw err;
   postcss()
     .use(rejectColors())
     .use(rejectBackgrounds())
+    .use(rejectRoot())
     .use(logWarnings({ throwError: true }))
     .process(data, { from: 'test/forVisual.css' })
     .then(function() {
       console.log('There\'s your visual confirmation that it works.');
+    })
+    .catch(function(error) {
+      console.log(error.stack);
     });
 });
