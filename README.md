@@ -1,5 +1,17 @@
 # postcss-log-warnings [![Build Status](https://travis-ci.org/davidtheclark/postcss-log-warnings.svg?branch=master)](https://travis-ci.org/davidtheclark/postcss-log-warnings)
 
+---
+
+**DEPRECATED** -- **DEPRECATED** -- **DEPRECATED**
+
+This plugin has grown up and become [postcss-reporter](https://github.com/postcss/postcss-reporter)!
+
+Please switch to the new official PostCSS plugin!
+
+**DEPRECATED** -- **DEPRECATED** -- **DEPRECATED**
+
+---
+
 Log PostCSS warnings in the console.
 
 ## Purpose
